@@ -14,12 +14,6 @@
     "mocha": "^7.1.2"
   },
   "dependencies": {
-    "axios": "^0.19.2",
-    "lodash": "^4.17.15"
-  },
-  "babel": {
-    "presets": [
-      "@babel/preset-env"
-    ]
+    "axios": "^0.19.2"
   }
 }

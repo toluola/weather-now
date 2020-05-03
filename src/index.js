@@ -8,7 +8,6 @@ export const getLocationWeather = async location => {
   const URL = `http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${process.env.APIWEATHERKEY}`;
   try {
     const response = await axios.get(URL);
-    console.log(response.data);
     return { coord: response.data.coord, weather: response.data.weather };
   } catch (error) {
     console.log('An error occur when getting location weather', error);
@@ -38,3 +37,13 @@ export const computeLocalDate = offsets => {
   const localdate = new Date(timestamp * 1000 + offsets);
   return localdate.toLocaleString();
 }
+
+export const returnWeatherAndTime = async ([location, code]) => {
+  const {coord, weather} = await getLocationWeather(location);
+  const time = await getLocationTime(coord);
+  const getOffset = computeOffset(time);
+  const computedTime = computeLocalDate(getOffset);
+  console.log(`Your ${location} time and weather is ${computedTime}  and ${weather[0].description}`);
+}
+
+returnWeatherAndTime(['california', 1020202]);
